@@ -80,6 +80,7 @@ std::string GenerateURL(CURL *curl, std::string name, std::string id)
           "person_name=" +
           std::string(encode_name) +
           "&dept_name=" + id;
+    curl_free(encode_name);
 
     return url;
 }
@@ -128,18 +129,12 @@ int Request(CURL *curl, CURLcode &res, std::string url, std::string &readBuffer,
     return 0;
 }
 
-#include <iostream>
-#include <string>
-
 void printProgress(int current, int total)
 {
     const int barWidth = 40;
 
     float progress = (float)current / total;
     int pos = barWidth * progress;
-    std::stringstream ss;
-    ss << std::fixed << std::setprecision(2) << progress * 100.0;
-    std::string prog = ss.str();
 
     std::cout << "\r[";
 
@@ -154,7 +149,7 @@ void printProgress(int current, int total)
     }
 
     std::cout << "] "
-              << prog
+              << static_cast<int>(progress * 100.0f)
               << "% ("
               << current << "/"
               << total << ")"

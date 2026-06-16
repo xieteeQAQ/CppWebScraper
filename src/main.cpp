@@ -12,7 +12,7 @@ int main()
         std::cout << "name: ";
         std::cin >> name;
         if (name.empty())
-            name = "安晟林";
+            name = "李可";
         else if (name == "q" || name == "Q")
             break;
         std::cout << "\nit will take about half a minute\n\n";

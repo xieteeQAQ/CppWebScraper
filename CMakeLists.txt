@@ -11,8 +11,34 @@ find_package(nlohmann_json CONFIG REQUIRED)
 
 add_executable(WebScraper src/main.cpp
     src/request.cpp)
-    
+
+
+if (WIN32)
+message(STATUS "Building for Windows")
+# curl 头文件
+target_include_directories(WebScraper PRIVATE
+    ${PROJECT_SOURCE_DIR}/lib/curl/include
+)
+
+    # curl 库目录
+target_link_directories(WebScraper PRIVATE
+    ${PROJECT_SOURCE_DIR}/lib/curl/lib
+)
+
+    # 根据你下载的库修改名字
+target_link_libraries(WebScraper PRIVATE
+    curl
+)
+
+    # Windows 中文输出
+target_compile_definitions(WebScraper PRIVATE
+    NOMINMAX
+)
+
+else()
+message(STATUS "Building for Mac OS")
 target_include_directories(WebScraper PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(WebScraper PRIVATE CURL::libcurl nlohmann_json::nlohmann_json)
+endif()
 
 set_target_properties(WebScraper PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/bin)

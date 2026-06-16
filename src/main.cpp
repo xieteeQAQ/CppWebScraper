@@ -2,6 +2,10 @@
 
 int main()
 {
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
     std::string name{};
     while (name != "q" && name != "Q")
     {

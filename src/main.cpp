@@ -75,6 +75,11 @@ int main()
                     if (Request(curl, res, url, readBuffer, result) == -1)
                     {
                         ++fail_count;
+                        if (fail_count > 3)
+                        {
+                            std::cerr << "|error| too many fail!\n";
+                            return -1;
+                        }
                         std::cout << "trying request again...\n";
                         std::this_thread::sleep_for(std::chrono::milliseconds(dist(generator)));
                         goto a;

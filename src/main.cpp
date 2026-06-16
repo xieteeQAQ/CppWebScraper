@@ -5,6 +5,10 @@ int main()
     std::string name{};
     while (name != "q" && name != "Q")
     {
+        std::ofstream f;
+        f.open("receive/receive.txt", std::ios::out);
+        f << "";
+        f.close();
         clear();
         std::cout << ">>> coded by C++\n\n";
         std::cout << "hello world!\n";

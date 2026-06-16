@@ -12,14 +12,7 @@ int WriteData(std::string readBuffer)
     {
         std::ofstream f;
         std::string filename = "receive/receive.txt";
-        static int count = 0;
-        if (count == 0)
-        {
-            f.open(filename, std::ios::out);
-            f << "";
-            f.close();
-            ++count;
-        }
+
         if (readBuffer[0] == '<')
         {
             // std::cout << "|log| writing the data into file......\n";
